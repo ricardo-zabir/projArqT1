@@ -2,7 +2,6 @@ package com.projarq.servicos;
 
 import com.projarq.domain.Cidade;
 import com.projarq.repository.CidadeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -11,9 +10,12 @@ import java.io.IOException;
 public class ServicosCidade {
     private final CidadeRepository cidadeRepository;
 
-    @Autowired
     public ServicosCidade(CidadeRepository cidadeRepository) {
         this.cidadeRepository = cidadeRepository;
+    }
+
+    public Iterable<Cidade> listarCidades() {
+        return cidadeRepository.findAll();
     }
 
     public Cidade criarCidade(Long id, String nome, double custoBasicoParaSaoPaulo) {

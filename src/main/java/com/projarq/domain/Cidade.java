@@ -5,11 +5,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.springframework.data.annotation.Id;
-
 
 public class Cidade {
-    @Id
     private Long id;
     private String nome;
     private double custoBasicoParaSaoPaulo;

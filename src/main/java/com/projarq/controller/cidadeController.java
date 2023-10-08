@@ -2,25 +2,25 @@ package com.projarq.controller;
 
 import com.projarq.domain.Cidade;
 import com.projarq.servicos.ServicosCidade;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import java.io.IOException;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+@Controller
 @RestController
 @RequestMapping("/cidades")
 public class cidadeController {
     private final ServicosCidade servicosCidade;
 
-    @Autowired
     public cidadeController(ServicosCidade servicosCidade) {
         this.servicosCidade = servicosCidade;
     }
 
-    @PostMapping
-    public Cidade criarCidade(@RequestParam String nome, @RequestParam double custoBasicoParaSaoPaulo) {
-        Long id=1L;
-        return servicosCidade.criarCidade(id,nome, custoBasicoParaSaoPaulo);
+    @GetMapping("")
+    public String listarCidades() {
+        System.out.println("Listando cidades");
+        return "ola mundo";
     }
 
     @GetMapping("/{id}")
