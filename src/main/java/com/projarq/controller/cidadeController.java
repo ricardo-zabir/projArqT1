@@ -19,7 +19,6 @@ public class cidadeController {
 
     @GetMapping("")
     public String listarCidades() {
-        System.out.println("Listando cidades");
         return "ola mundo";
     }
 
