@@ -2,8 +2,11 @@ package com.projarq.repository;
 
 import com.projarq.domain.Cidade;
 import java.util.ArrayList;
-import java.util.List;  
+import java.util.List;
 
+import org.springframework.stereotype.Component;  
+
+@Component
 public class CidadeRepository {
     private List<Cidade> cidades = new ArrayList<>();
     private Long idCounter = 1L;

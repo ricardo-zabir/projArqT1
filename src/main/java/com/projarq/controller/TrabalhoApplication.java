@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("com.projarq.controller.cidadeController")
+@ComponentScan("com.projarq")
 public class TrabalhoApplication {
 
 	public static void main(String[] args) {

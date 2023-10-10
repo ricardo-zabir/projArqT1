@@ -5,6 +5,7 @@ import com.projarq.repository.CidadeRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class ServicosCidade {
@@ -14,7 +15,7 @@ public class ServicosCidade {
         this.cidadeRepository = cidadeRepository;
     }
 
-    public Iterable<Cidade> listarCidades() {
+    public List<Cidade> listarCidades() {
         return cidadeRepository.findAll();
     }
 
