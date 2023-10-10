@@ -1,4 +1,4 @@
-package com.projarq.domain;
+package com.projarq.dominio.entidades;
 import java.util.Date;
 
 public class Encomenda {

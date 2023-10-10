@@ -1,7 +1,8 @@
-package com.projarq.servicos;
+package com.projarq.dominio.servicos;
 
-import com.projarq.domain.Cidade;
-import com.projarq.repository.CidadeRepository;
+import com.projarq.dominio.entidades.Cidade;
+import com.projarq.persistencia.CepApi;
+import com.projarq.persistencia.CidadeRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -10,9 +11,11 @@ import java.util.List;
 @Service
 public class ServicosCidade {
     private final CidadeRepository cidadeRepository;
+    private final CepApi cepApi;
 
-    public ServicosCidade(CidadeRepository cidadeRepository) {
+    public ServicosCidade(CidadeRepository cidadeRepository, CepApi cepApi) {
         this.cidadeRepository = cidadeRepository;
+        this.cepApi = cepApi;
     }
 
     public List<Cidade> listarCidades() {
@@ -31,7 +34,7 @@ public class ServicosCidade {
     public boolean verificaCEP(String cep, Long cidadeId) throws IOException {
         Cidade cidade = cidadeRepository.findById(cidadeId);
         if (cidade != null) {
-            return cidade.verificaCEP(cep);
+            return cepApi.verificaCEP(cep,cidade.getNome())? true : false;
         }
         return false;
     }

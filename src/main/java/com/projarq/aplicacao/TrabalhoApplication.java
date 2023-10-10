@@ -1,4 +1,4 @@
- package com.projarq.controller;
+ package com.projarq.aplicacao;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

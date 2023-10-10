@@ -1,31 +1,26 @@
-package com.projarq.controller;
+package com.projarq.aplicacao;
 
-import com.projarq.domain.Cidade;
-import com.projarq.servicos.ServicosCidade;
+import com.projarq.dominio.entidades.Cidade;
+import com.projarq.dominio.servicos.ServicosCidade;
 
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/cidades")
-public class cidadeController {
+public class cidadeUC{
     private final ServicosCidade servicosCidade;
 
-    public cidadeController(ServicosCidade servicosCidade) {
+    public cidadeUC(ServicosCidade servicosCidade) {
         this.servicosCidade = servicosCidade;
     }
-
-    @GetMapping("")
-    @CrossOrigin(origins = "*")
-    public String teste() {
-        return "devia estar funcionado";
-    } 
 
     @GetMapping("/lista")
     @CrossOrigin(origins = "*")
     public String listarCidades() {
-        return servicosCidade.listarCidades().toString();
+        return servicosCidade.listarCidades().stream().map(Cidade::getNome).collect(Collectors.toList()).toString();
     }
 
     @GetMapping("/{id}")
@@ -37,6 +32,6 @@ public class cidadeController {
     @GetMapping("/{id}/verificaCEP")
     @CrossOrigin(origins = "*")
     public boolean verificaCEP(@PathVariable Long id, @RequestParam String cep) throws IOException {
-        return servicosCidade.verificaCEP(cep, id);
+        return servicosCidade.verificaCEP(cep, id)? true : false;
     }
 }

@@ -1,13 +1,14 @@
-package com.projarq.repository;
+package com.projarq.persistencia;
 
-import com.projarq.domain.Cidade;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;  
+import org.springframework.stereotype.Component;
+import com.projarq.dominio.RepCidade;
+import com.projarq.dominio.entidades.Cidade;  
 
 @Component
-public class CidadeRepository {
+public class CidadeRepository implements RepCidade {
     private List<Cidade> cidades = new ArrayList<>();
     private Long idCounter = 1L;
 
