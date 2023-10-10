@@ -1,4 +1,4 @@
-package com.projarq.dominio;
+package com.projarq.dominio.repositorios;
 
 import java.util.List;
 

@@ -1,6 +1,5 @@
 package com.projarq.persistencia;
 
-import com.projarq.dominio.RepCep;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,6 +7,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import org.springframework.stereotype.Service;
+
+import com.projarq.dominio.repositorios.RepCep;
 
 @Service
 public class CepApi implements RepCep {

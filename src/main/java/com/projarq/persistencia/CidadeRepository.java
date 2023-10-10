@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
-import com.projarq.dominio.RepCidade;
-import com.projarq.dominio.entidades.Cidade;  
+
+import com.projarq.dominio.entidades.Cidade;
+import com.projarq.dominio.repositorios.RepCidade;  
 
 @Component
 public class CidadeRepository implements RepCidade {
