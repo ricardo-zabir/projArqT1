@@ -1,7 +1,16 @@
 package com.projarq.dominio.entidades;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "cidades")
 public class Cidade {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String nome;
     private double custoBasicoParaSaoPaulo;
@@ -12,8 +21,8 @@ public class Cidade {
         this.custoBasicoParaSaoPaulo = custoBasicoParaSaoPaulo;
     }
 
-    public Cidade() {
-    }
+
+    protected Cidade() {}
 
     public Long getId() {
         return id;
