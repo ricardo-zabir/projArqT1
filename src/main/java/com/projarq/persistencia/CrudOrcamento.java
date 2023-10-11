@@ -6,5 +6,5 @@ import com.projarq.dominio.entidades.Orcamento;
 
 @Repository
 public interface CrudOrcamento extends CrudRepository<Orcamento, Long> {
-    // Métodos personalizados, se necessário.
+
 }
