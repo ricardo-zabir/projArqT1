@@ -5,12 +5,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.projarq.dominio.entidades.Encomenda;
-import com.projarq.dominio.repositorios.RepCidade;  
+import com.projarq.dominio.entidades.Orcamento;  
 
 @Component
 public class OrcamentoRepository {
-    private List<Encomenda> encomendas = new ArrayList<>();
+    private List<Orcamento> orcamentos = new ArrayList<>();
     
 
     public OrcamentoRepository() {
@@ -18,9 +17,9 @@ public class OrcamentoRepository {
         
 
     }
-    public Encomenda salvar(Encomenda encomenda) {
-        encomendas.add(encomenda);
-        return encomenda;
+    public Orcamento salvar(Orcamento orcamento) {
+        orcamentos.add(orcamento);
+        return orcamento;
     }
 
     // public Cidade findById(Long id) {
@@ -32,8 +31,8 @@ public class OrcamentoRepository {
     //     return null;
     // }
 
-    // public List<Encomenda> findAll() {
-    //     return encomendas;
+    // public List<Orcamento> findAll() {
+    //     return Orcamentos;
     // }
 
     // public void delete(Long id) {

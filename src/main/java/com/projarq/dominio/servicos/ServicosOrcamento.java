@@ -1,8 +1,6 @@
 package com.projarq.dominio.servicos;
 
-import com.projarq.persistencia.CepApi;
 import com.projarq.dominio.entidades.Cidade;
-import com.projarq.persistencia.CidadeRepository;
 import com.projarq.persistencia.OrcamentoRepository;
 
 public class ServicosOrcamento {
