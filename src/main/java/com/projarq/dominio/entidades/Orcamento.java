@@ -1,20 +1,21 @@
 package com.projarq.dominio.entidades;
 import java.util.Date;
 
-public class Encomenda {
+public class Orcamento {
 
+    private Long id;
     private Date dataHora;
     private Cidade cidadeOrigem;
     private Cidade cidadeDestino;
     private int pesoGramas;
-    private double custoBasico;
+    private double custoBasico; 
     private double custoAdicional;
     private double valorImpostos;
     private double desconto;
     private double valorFinal;
 
     // Construtor
-    public Encomenda(Cidade cidadeOrigem, Cidade cidadeDestino, int pesoGramas) {
+    public Orcamento(Long id, Cidade cidadeOrigem, Cidade cidadeDestino, int pesoGramas) {
         this.dataHora = new Date();
         this.cidadeOrigem = cidadeOrigem;
         this.cidadeDestino = cidadeDestino;
@@ -31,7 +32,7 @@ public class Encomenda {
         // Defina aqui a tabela de custo básico para São Paulo e outras cidades
         // Exemplo:
         double custo=0;
-        if (cidadeDestino.getNome().equalsIgnoreCase("São Paulo ")) {
+        if (cidadeDestino.getNome().equalsIgnoreCase("São Paulo")) {
             custoBasico = cidadeOrigem.getCustoBasicoParaSaoPaulo();
         } else {
             custo = cidadeOrigem.getCustoBasicoParaSaoPaulo() + cidadeDestino.getCustoBasicoParaSaoPaulo();
@@ -40,6 +41,16 @@ public class Encomenda {
     }
 
     private void calcularCustoAdicional() {
+        int pesoKg = Math.round(pesoGramas/1000);
+        if(pesoKg < 2){
+            custoAdicional=0;
+        }
+        else if(pesoKg > 2 && pesoKg < 12){
+            custoAdicional=10;
+        }
+        else { 
+            custoAdicional=15;
+        }
     }
 
     private void calcularImpostos() {
