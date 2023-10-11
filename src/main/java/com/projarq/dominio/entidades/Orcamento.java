@@ -1,74 +1,85 @@
 package com.projarq.dominio.entidades;
-import java.util.Date;
 
+import java.time.LocalDate;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "orcamentos")
 public class Orcamento {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Date dataHora;
+    @ManyToOne
+    @JoinColumn(name = "cidadeOrigem_id")
     private Cidade cidadeOrigem;
-    private Cidade cidadeDestino;
-    private int pesoGramas;
-    private double custoBasico; 
-    private double custoAdicional;
-    private double valorImpostos;
-    private double desconto;
-    private double valorFinal;
 
+    @ManyToOne
+    @JoinColumn(name = "cidadeDestino_id")
+    private Cidade cidadeDestino;
+
+    
+
+    private int peso;
+    private double custoTotal;
+    private double custoImpostos;
+    private double desconto;
+    private LocalDate dataOrcamento;
+
+    // Construtor vazio necessário para JPA
+    protected Orcamento() {
+    }
     // Construtor
-    public Orcamento(Long id, Cidade cidadeOrigem, Cidade cidadeDestino, int pesoGramas) {
-        this.dataHora = new Date();
+    public Orcamento(Long id, Cidade cidadeOrigem, Cidade cidadeDestino, int peso, double custoTotal,
+            double custoImpostos, double desconto, LocalDate dataOrcamento) {
+        this.id = id;
         this.cidadeOrigem = cidadeOrigem;
         this.cidadeDestino = cidadeDestino;
-        this.pesoGramas = pesoGramas;
-        custoBasico = calcularCustoBasico();
-        calcularCustoAdicional();
-        calcularImpostos();
-        calcularDesconto();
-        calcularValorFinal();
+        this.peso = peso;
+        this.custoTotal = custoTotal;
+        this.custoImpostos = custoImpostos;
+        this.desconto = desconto;
+        this.dataOrcamento = dataOrcamento;
     }
 
-    // Métodos para cálculos
-    private double calcularCustoBasico() {
-        // Defina aqui a tabela de custo básico para São Paulo e outras cidades
-        // Exemplo:
-        double custo=0;
-        if (cidadeDestino.getNome().equalsIgnoreCase("São Paulo")) {
-            custoBasico = cidadeOrigem.getCustoBasicoParaSaoPaulo();
-        } else {
-            custo = cidadeOrigem.getCustoBasicoParaSaoPaulo() + cidadeDestino.getCustoBasicoParaSaoPaulo();
-        }
-        return custo;
+    // getters e setters
+    public Cidade getCidadeOrigem() {
+        return cidadeOrigem;
     }
 
-    private void calcularCustoAdicional() {
-        int pesoKg = Math.round(pesoGramas/1000);
-        if(pesoKg < 2){
-            custoAdicional=0;
-        }
-        else if(pesoKg > 2 && pesoKg < 12){
-            custoAdicional=10;
-        }
-        else { 
-            custoAdicional=15;
-        }
+    public Cidade getCidadeDestino() {
+        return cidadeDestino;
     }
 
-    private void calcularImpostos() {
-
+    public int getPeso() {
+        return peso;
     }
 
-    private void calcularDesconto() {
-    
+    public double getCustoTotal() {
+        return custoTotal;
     }
 
-    private void calcularValorFinal() {
-
+    public double getCustoImpostos() {
+        return custoImpostos;
     }
 
+    public double getDesconto() {
+        return desconto;
+    }
+
+    public LocalDate getDataOrcamento() {
+        return dataOrcamento;
+    }
 
     @Override
     public String toString() {
-        
+
         return "";
     }
 }
