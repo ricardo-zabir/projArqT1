@@ -12,14 +12,14 @@ import com.projarq.dominio.repositorios.RepOracamento;
 @Service
 public class ServicosOrcamento {
     private final RepOracamento orcamentoRepository;
-    private final ServicosCustoAdicional servicosCustoAdicional;
+    private final InterfaceServicosCustoAdicional servicosCustoAdicional;
     private final ServicoCustoBasico servicoCustoBasico;
     private final ServicosCidade servicosCidade;
     private final ServicoImposto servicoImposto;
 
     public ServicosOrcamento(RepOracamento orcamentoRepository,
             ServicosCidade servicosCidade,
-            ServicosCustoAdicional servicosCustoAdicional,
+            InterfaceServicosCustoAdicional servicosCustoAdicional,
             ServicoCustoBasico servicoCustoBasico,
             ServicoImposto servicoImposto) {
         this.orcamentoRepository = orcamentoRepository;
