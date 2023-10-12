@@ -16,17 +16,20 @@ public class ServicosOrcamento {
     private final ServicoCustoBasico servicoCustoBasico;
     private final ServicosCidade servicosCidade;
     private final ServicoImposto servicoImposto;
+    private final ServicosPromocoes servicosPromocoes;
 
     public ServicosOrcamento(RepOracamento orcamentoRepository,
             ServicosCidade servicosCidade,
             InterfaceServicosCustoAdicional servicosCustoAdicional,
             ServicoCustoBasico servicoCustoBasico,
-            ServicoImposto servicoImposto) {
+            ServicoImposto servicoImposto,
+            ServicosPromocoes servicosPromocoes) {
         this.orcamentoRepository = orcamentoRepository;
         this.servicosCidade = servicosCidade;
         this.servicosCustoAdicional = servicosCustoAdicional;
         this.servicoCustoBasico = servicoCustoBasico;
         this.servicoImposto = servicoImposto;
+        this.servicosPromocoes = servicosPromocoes;
     }
 
     public Cidade obterCidadePorId(Long id) {
@@ -39,6 +42,7 @@ public class ServicosOrcamento {
         double precoAdicional = servicosCustoAdicional.getAdicionalPorPeso(gramas);
         double imposto = servicoImposto.getImposto(custoBasico);
         double precoTotal = custoBasico + precoAdicional + imposto;
+        precoTotal -= servicosPromocoes.calculaDesconto(cidadeOrigem, cidadeDestino, gramas, precoTotal);
         LocalDate data = LocalDate.now();
         Orcamento orcamento = new Orcamento(id, cidadeOrigem, cidadeDestino, gramas, precoTotal, imposto, 0.00, data);
         orcamentoRepository.salvar(orcamento);
