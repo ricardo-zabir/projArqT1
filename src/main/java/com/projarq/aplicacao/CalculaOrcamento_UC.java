@@ -1,5 +1,7 @@
 package com.projarq.aplicacao;
 
+import java.io.IOException;
+
 import org.springframework.stereotype.Component;
 
 import com.projarq.dominio.entidades.Cidade;
@@ -11,9 +13,7 @@ public class CalculaOrcamento_UC {
         this.servicosOrcamento = servicosOrcamento;
     }
 
-    public double run(Long origem, Long destino, int gramas){
-        Cidade cidadeOrigem = servicosOrcamento.obterCidadePorId(origem);
-        Cidade cidadeDestino = servicosOrcamento.obterCidadePorId(destino);
-        return servicosOrcamento.calcularPrecoDeNovaEncomenda(cidadeOrigem, cidadeDestino, gramas);
+    public double run(String origem, String destino, int gramas) throws IOException{
+        return servicosOrcamento.calcularPrecoDeNovaEncomenda(origem, destino, gramas);
     }
 }

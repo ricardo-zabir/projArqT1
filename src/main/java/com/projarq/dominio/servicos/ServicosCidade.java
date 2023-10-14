@@ -35,6 +35,17 @@ public class ServicosCidade {
         return RepCidade.findById(id);
     }
 
+    public Cidade obterCidadePorCep(String cep) throws IOException {
+        //crie a implementacao de obtercidadeporCep que use verifica cep
+        for (Cidade cidade : listarCidades().stream().collect(Collectors.toList())) {
+            String cidadeCep = cepApi.verificaCEP(cep);
+            if (cidade.getNome().equalsIgnoreCase(cidadeCep)) {
+                return cidade;
+            }
+        }
+        return null;
+    }
+
     public boolean verificaCEP(String cep) throws IOException {
         if (cep != null) {
             String cidadeCep = cepApi.verificaCEP(cep);
