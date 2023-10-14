@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projarq.aplicacao.ListaCidades_UC;
 import com.projarq.aplicacao.CalculaOrcamento_UC;
 import com.projarq.aplicacao.ListaOrcamentosPorData_UC;
+import com.projarq.aplicacao.RetornaPromoVigente_UC;
 
 @RestController
 public class CalculoFreteController {
@@ -23,14 +24,15 @@ public class CalculoFreteController {
     private final ListaCidades_UC listaCidades_UC;
     private final CalculaOrcamento_UC calculaOrcamento_UC;
     private final ListaOrcamentosPorData_UC listaOrcamentosPorData_UC;
+    private final RetornaPromoVigente_UC retornaPromoVigente_UC;
 
     public CalculoFreteController(ValidaCEP_UC validaCEP_UC, ListaCidades_UC listaCidades_UC,
-            CalculaOrcamento_UC calculaOrcamento_UC, ListaOrcamentosPorData_UC listaOrcamentosPorData_UC) { // Correção
-                                                                                                            // aqui
+            CalculaOrcamento_UC calculaOrcamento_UC, ListaOrcamentosPorData_UC listaOrcamentosPorData_UC, RetornaPromoVigente_UC retornaPromoVigente_UC) { // Correção aqui
         this.listaCidades_UC = listaCidades_UC;
         this.validaCEP_UC = validaCEP_UC;
         this.calculaOrcamento_UC = calculaOrcamento_UC;
         this.listaOrcamentosPorData_UC = listaOrcamentosPorData_UC;
+        this.retornaPromoVigente_UC = retornaPromoVigente_UC;
     }
 
     @GetMapping("/cidadesatendidas")
@@ -65,6 +67,12 @@ public class CalculoFreteController {
     @GetMapping("/listaorcamentospordata")
     public ResponseEntity<List<Orcamento>> listaOrcamentosPorData(@RequestParam LocalDate data) {
         List<Orcamento> resposta = listaOrcamentosPorData_UC.run(data);
+        return ResponseEntity.status(HttpStatus.OK).body(resposta);
+    }
+
+    @GetMapping("/retornaPromoVigente")
+    public ResponseEntity<String> retornaPromoVigente() {
+        String resposta = retornaPromoVigente_UC.run();
         return ResponseEntity.status(HttpStatus.OK).body(resposta);
     }
 }

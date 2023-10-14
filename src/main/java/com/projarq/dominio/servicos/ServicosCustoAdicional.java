@@ -3,7 +3,7 @@ package com.projarq.dominio.servicos;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ServicosCustoAdicional {
+public class ServicosCustoAdicional implements InterfaceServicosCustoAdicional {
 
     public ServicosCustoAdicional(){
         
@@ -12,8 +12,8 @@ public class ServicosCustoAdicional {
     public double getAdicionalPorPeso(int gramas) {
         int emKg = (int) (Math.ceil(gramas / 1000.00));
         double adicionalPorPeso = 0.00;
-        if(emKg >= 2) {
-            if(emKg >= 12) {
+        if(emKg > 2) {
+            if(emKg <= 12) {
                 adicionalPorPeso = (emKg - 2) * 10.00;
             }
             if(emKg > 12){
