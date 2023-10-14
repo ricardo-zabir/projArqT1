@@ -1,5 +1,6 @@
 package com.projarq.dominio.servicos;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.stream.Collectors;
 import java.util.List;
@@ -33,8 +34,13 @@ public class ServicosOrcamento {
         return servicosCidade.obterCidadePorId(id);
     }
 
-    public double calcularPrecoDeNovaEncomenda(Cidade cidadeOrigem, Cidade cidadeDestino, int gramas) {
+    public double calcularPrecoDeNovaEncomenda(String cepOrigem, String cepDestino, int gramas) throws IOException {
         Long id = 1L;
+        Cidade cidadeOrigem = servicosCidade.obterCidadePorCep(cepOrigem);
+        Cidade cidadeDestino = servicosCidade.obterCidadePorCep(cepDestino);
+        if (cidadeOrigem == null || cidadeDestino == null) {
+            throw new IllegalArgumentException("Cidade não encontrada");
+        }
         double custoBasico = servicoCustoBasico.getCustoBasico(cidadeOrigem, cidadeDestino, gramas);
         double precoAdicional = servicosCustoAdicional.getAdicionalPorPeso(gramas);
         double imposto = servicoImposto.getImposto(custoBasico);

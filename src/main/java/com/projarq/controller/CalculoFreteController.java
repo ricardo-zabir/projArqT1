@@ -25,7 +25,8 @@ public class CalculoFreteController {
     private final ListaOrcamentosPorData_UC listaOrcamentosPorData_UC;
 
     public CalculoFreteController(ValidaCEP_UC validaCEP_UC, ListaCidades_UC listaCidades_UC,
-            CalculaOrcamento_UC calculaOrcamento_UC, ListaOrcamentosPorData_UC listaOrcamentosPorData_UC) { // Correção aqui
+            CalculaOrcamento_UC calculaOrcamento_UC, ListaOrcamentosPorData_UC listaOrcamentosPorData_UC) { // Correção
+                                                                                                            // aqui
         this.listaCidades_UC = listaCidades_UC;
         this.validaCEP_UC = validaCEP_UC;
         this.calculaOrcamento_UC = calculaOrcamento_UC;
@@ -49,10 +50,16 @@ public class CalculoFreteController {
     // exemplo pra teste:
     // http://localhost:8080/calculafrete?origem=1&destino=2&gramas=15000
     @GetMapping("/calculafrete")
-    public ResponseEntity<Double> calculaFrete(@RequestParam Long origem, @RequestParam Long destino,
+    public ResponseEntity<?> calculaFrete(@RequestParam String origem, @RequestParam String destino,
             @RequestParam int gramas) {
-        Double resposta = calculaOrcamento_UC.run(origem, destino, gramas);
-        return ResponseEntity.status(HttpStatus.OK).body(resposta);
+        try {
+            Double resposta = calculaOrcamento_UC.run(origem, destino, gramas);
+            return ResponseEntity.status(HttpStatus.OK).body(resposta);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cidade não encontrada no banco de dados.");
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno ao calcular o frete.");
+        }
     }
 
     @GetMapping("/listaorcamentospordata")
