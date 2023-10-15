@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import org.springframework.stereotype.Component;
 
-import com.projarq.dominio.entidades.Cidade;
+//import com.projarq.dominio.entidades.Cidade;
 import com.projarq.dominio.servicos.ServicosOrcamento;
 @Component
 public class CalculaOrcamento_UC {
