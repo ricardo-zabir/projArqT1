@@ -2,7 +2,7 @@ package com.projarq.aplicacao;
 
 import org.springframework.stereotype.Component;
 
-import com.projarq.dominio.servicos.InterfaceServicosPromocao;
+//import com.projarq.dominio.servicos.InterfaceServicosPromocao;
 import com.projarq.dominio.servicos.ServicosPromocoes;
 
 
