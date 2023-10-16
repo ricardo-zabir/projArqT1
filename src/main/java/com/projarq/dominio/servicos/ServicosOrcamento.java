@@ -48,9 +48,10 @@ public class ServicosOrcamento {
         double precoAdicional = servicosCustoAdicional.getAdicionalPorPeso(gramas);
         double imposto = servicoImposto.getImposto(custoBasico, cidadeOrigem);
         double precoTotal = custoBasico + precoAdicional + imposto;
-        precoTotal -= servicosPromocoes.calculaDesconto(cidadeOrigem, cidadeDestino, gramas, precoTotal);
+        double desconto = servicosPromocoes.calculaDesconto(cidadeOrigem, cidadeDestino, gramas, precoTotal);
+        precoTotal -= desconto;
         LocalDate data = LocalDate.now();
-        Orcamento orcamento = new Orcamento(id, cidadeOrigem, cidadeDestino, gramas, precoTotal, imposto, 0.00, data);
+        Orcamento orcamento = new Orcamento(id, cidadeOrigem, cidadeDestino, gramas, precoTotal, imposto, desconto, data);
         orcamentoRepository.salvar(orcamento);
         return precoTotal;
     }
