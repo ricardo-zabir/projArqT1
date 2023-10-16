@@ -1,9 +1,11 @@
 package com.projarq.dominio.servicos;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ServicoImposto {
+@Primary
+public class ServicoImposto implements InterfaceServicosImposto{
     public ServicoImposto() {
     }
 
