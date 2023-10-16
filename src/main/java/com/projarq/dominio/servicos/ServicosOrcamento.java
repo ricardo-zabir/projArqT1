@@ -46,7 +46,7 @@ public class ServicosOrcamento {
         }
         double custoBasico = servicoCustoBasico.getCustoBasico(cidadeOrigem, cidadeDestino, gramas);
         double precoAdicional = servicosCustoAdicional.getAdicionalPorPeso(gramas);
-        double imposto = servicoImposto.getImposto(custoBasico);
+        double imposto = servicoImposto.getImposto(custoBasico, cidadeOrigem);
         double precoTotal = custoBasico + precoAdicional + imposto;
         precoTotal -= servicosPromocoes.calculaDesconto(cidadeOrigem, cidadeDestino, gramas, precoTotal);
         LocalDate data = LocalDate.now();
