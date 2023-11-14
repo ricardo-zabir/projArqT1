@@ -16,13 +16,11 @@ public class Orcamento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "cidadeOrigem_id")
-    private Cidade cidadeOrigem;
+  
+    
+    private String cidadeOrigem;
 
-    @ManyToOne
-    @JoinColumn(name = "cidadeDestino_id")
-    private Cidade cidadeDestino;
+    private String cidadeDestino;
 
     
 
@@ -36,7 +34,7 @@ public class Orcamento {
     protected Orcamento() {
     }
     // Construtor
-    public Orcamento(Long id, Cidade cidadeOrigem, Cidade cidadeDestino, int peso, double custoTotal,
+    public Orcamento(Long id, String cidadeOrigem, String cidadeDestino, int peso, double custoTotal,
             double custoImpostos, double desconto, LocalDate dataOrcamento) {
         this.id = id;
         this.cidadeOrigem = cidadeOrigem;
@@ -49,11 +47,11 @@ public class Orcamento {
     }
 
     // getters e setters
-    public Cidade getCidadeOrigem() {
+    public String getCidadeOrigem() {
         return cidadeOrigem;
     }
 
-    public Cidade getCidadeDestino() {
+    public String getCidadeDestino() {
         return cidadeDestino;
     }
 

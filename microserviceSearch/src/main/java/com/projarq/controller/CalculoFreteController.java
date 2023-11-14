@@ -26,42 +26,8 @@ public class CalculoFreteController {
     private final ListaOrcamentosPorData_UC listaOrcamentosPorData_UC;
     private final RetornaPromoVigente_UC retornaPromoVigente_UC;
 
-    public CalculoFreteController(ValidaCEP_UC validaCEP_UC, ListaCidades_UC listaCidades_UC,
-            CalculaOrcamento_UC calculaOrcamento_UC, ListaOrcamentosPorData_UC listaOrcamentosPorData_UC, RetornaPromoVigente_UC retornaPromoVigente_UC) { // Correção aqui
-        this.listaCidades_UC = listaCidades_UC;
-        this.validaCEP_UC = validaCEP_UC;
-        this.calculaOrcamento_UC = calculaOrcamento_UC;
+    public CalculoFreteController(ListaOrcamentosPorData_UC listaOrcamentosPorData_UC) { // Correção aqui
         this.listaOrcamentosPorData_UC = listaOrcamentosPorData_UC;
-        this.retornaPromoVigente_UC = retornaPromoVigente_UC;
-    }
-
-    @GetMapping("/cidadesatendidas")
-    public ResponseEntity<List<String>> listaCidades() {
-        List<String> lista = listaCidades_UC.run();
-
-        return ResponseEntity.status(HttpStatus.OK).body(lista);
-    }
-
-    @GetMapping("/validacep")
-    public ResponseEntity<Boolean> validaCEP(@RequestParam String cep) throws IOException {
-        Boolean resposta = validaCEP_UC.run(cep);
-
-        return ResponseEntity.status(HttpStatus.OK).body(resposta);
-    }
-
-    // exemplo pra teste:
-    // http://localhost:8080/calculafrete?origem=1&destino=2&gramas=15000
-    @GetMapping("/calculafrete")
-    public ResponseEntity<?> calculaFrete(@RequestParam String origem, @RequestParam String destino,
-            @RequestParam int gramas) {
-        try {
-            Double resposta = calculaOrcamento_UC.run(origem, destino, gramas);
-            return ResponseEntity.status(HttpStatus.OK).body(resposta);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cidade não encontrada no banco de dados.");
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno ao calcular o frete.");
-        }
     }
 
     @GetMapping("/listaorcamentospordata")
@@ -70,9 +36,4 @@ public class CalculoFreteController {
         return ResponseEntity.status(HttpStatus.OK).body(resposta);
     }
 
-    @GetMapping("/retornaPromoVigente")
-    public ResponseEntity<String> retornaPromoVigente() {
-        String resposta = retornaPromoVigente_UC.run();
-        return ResponseEntity.status(HttpStatus.OK).body(resposta);
-    }
 }
