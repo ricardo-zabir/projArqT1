@@ -12,7 +12,7 @@ public class ListaOrcamentosPorData_UC {
 
     public ListaOrcamentosPorData_UC(ServicosOrcamento servicosOrcamento) {
         this.servicosOrcamento = servicosOrcamento;
-    }x
+    }
 
     public List<Orcamento> run(LocalDate data) {
         return servicosOrcamento.listarOrcamentosPorData(data);
