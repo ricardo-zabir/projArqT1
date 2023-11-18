@@ -3,8 +3,8 @@ package com.projarq.aplicacao;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.stereotype.Component;
-import com.projarq.dominio.entidades.Orcamento;
-import com.projarq.dominio.servicos.ServicosOrcamento;
+import com.projarq.dominio.Orcamento;
+import com.projarq.dominio.ServicosOrcamento;
 
 @Component
 public class ListaOrcamentosPorData_UC {

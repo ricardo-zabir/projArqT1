@@ -1,7 +1,7 @@
 package com.projarq.persistencia;
 
-import com.projarq.dominio.repositorios.RepOracamento;
-import com.projarq.dominio.entidades.Orcamento;
+import com.projarq.dominio.RepOracamento;
+import com.projarq.dominio.Orcamento;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.repository.CrudRepository;

@@ -1,4 +1,4 @@
-package com.projarq.dominio.entidades;
+package com.projarq.dominio;
 
 import java.time.LocalDate;
 

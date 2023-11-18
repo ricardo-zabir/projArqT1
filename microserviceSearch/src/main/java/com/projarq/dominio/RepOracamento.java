@@ -1,8 +1,8 @@
-package com.projarq.dominio.repositorios;
+package com.projarq.dominio;
 
 import java.util.List;
 
-import com.projarq.dominio.entidades.Orcamento;
+import com.projarq.dominio.Orcamento;
 
 public interface RepOracamento {
     Orcamento salvar(Orcamento orcamento);
