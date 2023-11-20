@@ -35,8 +35,9 @@ public class CalculoFreteController {
 
     @PostMapping("/servicoorcamento/salvaorcamento")
     public ResponseEntity<Orcamento> salvaOrcamento(@RequestBody Orcamento orcamento) {
+        System.out.println(orcamento.getDataOrcamento());
         Orcamento resposta = salvaOrcamento_UC.run(orcamento);
-        return ResponseEntity.status(HttpStatus.OK).body(resposta);
+        return ResponseEntity.status(HttpStatus.OK).body(orcamento);
     }
 
 }

@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.stream.Collectors;
 import java.util.List;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.projarq.dominio.entidades.Cidade;
 import com.projarq.dominio.entidades.Orcamento;
@@ -37,7 +40,7 @@ public class ServicosOrcamento {
         return servicosCidade.obterCidadePorId(id);
     }
 
-    public double calcularPrecoDeNovaEncomenda(String cepOrigem, String cepDestino, int gramas) throws IOException {
+    public Orcamento calcularPrecoDeNovaEncomenda(String cepOrigem, String cepDestino, int gramas) throws IOException {
         Long id = 1L;
         Cidade cidadeOrigem = servicosCidade.obterCidadePorCep(cepOrigem);
         Cidade cidadeDestino = servicosCidade.obterCidadePorCep(cepDestino);
@@ -52,8 +55,9 @@ public class ServicosOrcamento {
         precoTotal -= desconto;
         LocalDate data = LocalDate.now();
         Orcamento orcamento = new Orcamento(id, cepOrigem, cepDestino, gramas, precoTotal, imposto, desconto, data);
-        orcamentoRepository.salvar(orcamento);
-        return precoTotal;
+        ResponseEntity<Orcamento> orc = new RestTemplate().postForEntity("http://localhost:8080/servicoorcamento/salvaorcamento", orcamento, Orcamento.class);
+       // orcamentoRepository.salvar(orcamento);
+        return orc.getBody();
     }
 
     public List<Orcamento> listarOrcamentosPorData(LocalDate data) {

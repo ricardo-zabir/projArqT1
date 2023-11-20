@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.springframework.core.ParameterizedTypeReference;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,7 +61,7 @@ public class CalculoFreteController {
     public ResponseEntity<?> calculaFrete(@RequestParam String origem, @RequestParam String destino,
             @RequestParam int gramas) {
         try {
-            Double resposta = calculaOrcamento_UC.run(origem, destino, gramas);
+            Orcamento resposta = calculaOrcamento_UC.run(origem, destino, gramas);
             return ResponseEntity.status(HttpStatus.OK).body(resposta);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cidade não encontrada no banco de dados.");
