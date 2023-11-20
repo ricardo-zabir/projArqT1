@@ -5,13 +5,19 @@ import com.projarq.dominio.entidades.Orcamento;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
 
 import com.projarq.aplicacao.ListaCidades_UC;
 import com.projarq.aplicacao.CalculaOrcamento_UC;
@@ -65,9 +71,12 @@ public class CalculoFreteController {
     }
 
     @GetMapping("/listaorcamentospordata")
-    public ResponseEntity<List<Orcamento>> listaOrcamentosPorData(@RequestParam LocalDate data) {
-        List<Orcamento> resposta = listaOrcamentosPorData_UC.run(data);
-        return ResponseEntity.status(HttpStatus.OK).body(resposta);
+    public ResponseEntity<Orcamento[]> listaOrcamentosPorData(@RequestParam LocalDate data) {
+        HashMap<String, String> uriVariables = new HashMap<>();
+        uriVariables.put("data", data.toString());
+        ResponseEntity<Orcamento[]> resposta = new RestTemplate().getForEntity("http://localhost:8080/servicoorcamento/listaorcamentospordata?data={data}", Orcamento[].class ,uriVariables);
+        // List<Orcamento> orcamentos = Arrays.asList(resposta.getBody());
+        return ResponseEntity.status(HttpStatus.OK).body(resposta.getBody());
     }
 
     @GetMapping("/retornaPromoVigente")

@@ -27,13 +27,13 @@ public class CalculoFreteController {
         this.salvaOrcamento_UC = salvaOrcamento_UC;
     }
 
-    @GetMapping("/listaorcamentospordata")
+    @GetMapping("/servicoorcamento/listaorcamentospordata")
     public ResponseEntity<List<Orcamento>> listaOrcamentosPorData(@RequestParam LocalDate data) {
         List<Orcamento> resposta = listaOrcamentosPorData_UC.run(data);
         return ResponseEntity.status(HttpStatus.OK).body(resposta);
     }
 
-    @PostMapping("/salvaorcamento")
+    @PostMapping("/servicoorcamento/salvaorcamento")
     public ResponseEntity<Orcamento> salvaOrcamento(@RequestBody Orcamento orcamento) {
         Orcamento resposta = salvaOrcamento_UC.run(orcamento);
         return ResponseEntity.status(HttpStatus.OK).body(resposta);

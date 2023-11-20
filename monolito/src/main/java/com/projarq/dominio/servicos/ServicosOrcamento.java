@@ -51,7 +51,7 @@ public class ServicosOrcamento {
         double desconto = servicosPromocoes.calculaDesconto(cidadeOrigem, cidadeDestino, gramas, precoTotal);
         precoTotal -= desconto;
         LocalDate data = LocalDate.now();
-        Orcamento orcamento = new Orcamento(id, cidadeOrigem, cidadeDestino, gramas, precoTotal, imposto, desconto, data);
+        Orcamento orcamento = new Orcamento(id, cepOrigem, cepDestino, gramas, precoTotal, imposto, desconto, data);
         orcamentoRepository.salvar(orcamento);
         return precoTotal;
     }
