@@ -1,0 +1,63 @@
+services:
+  monolito:
+    image: monolito
+    build: ./monolito
+    mem_limit: 700M
+    ports:
+      - "8100:8100"
+    networks:
+      - projarq-network
+    depends_on:
+      - naming-server
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://naming-server:8761/eureka
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+  microsservico:
+    image: microsservico
+    build: ./microserviceSearch
+    mem_limit: 700M
+    ports:
+      - "8080:8080"
+    networks:
+      - projarq-network
+    depends_on:
+      - naming-server
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://naming-server:8761/eureka
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+  api-gateway:
+    image: gateway
+    build: ./api-gateway
+    mem_limit: 700M
+    ports:
+      - "8765:8765"
+    networks:
+      - projarq-network
+    depends_on:
+      - naming-server
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://naming-server:8761/eureka
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+  naming-server:
+    image: namingserver
+    build: ./naming-server
+    mem_limit: 700M
+    ports:
+      - "8761:8761"
+    networks:
+      - projarq-network
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+networks:
+  projarq-network:
