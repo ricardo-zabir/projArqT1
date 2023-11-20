@@ -19,7 +19,7 @@ public class ApiGatewayConfiguration {
 				.route(p -> p.path("/calculafrete/**")
 						.uri("lb://monolito"))
 				.route(p -> p.path("/listaorcamentospordata/**")
-						.uri("lb://monolito"))
+						.uri("lb://micro-orcamento"))
 				.build();
 	}    
 }
